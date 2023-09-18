@@ -11,4 +11,7 @@ def login(username1,password1):
     if len(number)!=0:
         return True
 
-
+def new_user(username,password):
+    query = text("INSERT INTO users (username,password) VALUES (:username,:password)")
+    right_user = db.session.execute(query, {"username": username, "password": password})
+    db.session.commit()
