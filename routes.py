@@ -2,6 +2,7 @@ from app import app
 from flask import redirect, render_template,request
 import user
 from flask_sqlalchemy import SQLAlchemy
+import blogs
 
 @app.route("/")
 def index():
@@ -27,3 +28,15 @@ def new_user():
     right=user.new_user(new_username,new_password)
     return redirect("/")
 
+@app.route("/Blog", methods=["POST"])
+def Blog():
+     community = request.form["community"]
+     if community=="1":
+         list=blogs.find_all_school_blogname()
+         return render_template("Blog.html",community="School",list=list)
+     if community=="2":
+         return render_template("Blog.html",community="Life")
+     if community=="3":
+         return render_template("Blog.html",community="Sport")
+     if community=="4":
+         return render_template("Blog.html",community="Game")

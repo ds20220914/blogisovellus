@@ -1,0 +1,10 @@
+<form action="/Blog2" method="Get">
+
+hello welcome to {{community}}!
+
+<hr>
+{% for name in list %}
+    <input type="submit" name="button" value="{{ name[0] }}">
+    
+<hr>
+{% endfor %}
