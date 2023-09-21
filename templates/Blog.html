@@ -1,8 +1,10 @@
-<form action="/Blog2" method="POST">
-  <p>Hello welcome to {{ community }}!</p>
-  <hr>
-  {% for name in list %}
+<form action="/Blog2" method="Get">
+
+hello welcome to {{community}}!
+
+<hr>
+{% for name in list %}
     <input type="submit" name="button" value="{{ name[0] }}">
-    <hr>
-  {% endfor %}
-</form>
+    <a href="/Blog2/{{ name[0] }}">Go to blog</a>
+<hr>
+{% endfor %}

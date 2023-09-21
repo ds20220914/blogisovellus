@@ -40,3 +40,7 @@ def Blog():
          return render_template("Blog.html",community="Sport")
      if community=="4":
          return render_template("Blog.html",community="Game")
+
+@app.route("/Blog2/<name>")
+def Blog2(name):
+    return render_template("Blog2.html")
