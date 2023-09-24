@@ -35,12 +35,15 @@ def Blog():
          list=blogs.find_all_school_blogname()
          return render_template("Blog.html",community="School",list=list)
      if community=="2":
-         return render_template("Blog.html",community="Life")
+         list=blogs.find_all_Life_blogname()
+         return render_template("Blog.html",community="Life",list=list)
      if community=="3":
          return render_template("Blog.html",community="Sport")
      if community=="4":
          return render_template("Blog.html",community="Game")
 
-@app.route("/Blog2/<name>")
-def Blog2(name):
-    return render_template("Blog2.html")
+@app.route("/Blog2")
+def Blog2():
+    community = request.args.get('community')
+    blog_name = request.args.get('blog_name')
+    return render_template("Blog2.html",community=community,blog_name=blog_name)

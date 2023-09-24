@@ -1,10 +1,11 @@
-<form action="/Blog2" method="Get">
+
+<form action="/Blog2" method="GET">
 
 hello welcome to {{community}}!
 
 <hr>
 {% for name in list %}
-    <input type="submit" name="button" value="{{ name[0] }}">
-    <a href="/Blog2/{{ name[0] }}">Go to blog</a>
+    {{name[0]}}
+    <a href="/Blog2?community={{ community }}&blog_name={{ name[0] }}">Go to blog</a>
 <hr>
 {% endfor %}
