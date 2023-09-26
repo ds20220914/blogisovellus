@@ -1,5 +1,5 @@
 from app import app
-from flask import redirect, render_template,request
+from flask import redirect, render_template,request,session
 import user
 from flask_sqlalchemy import SQLAlchemy
 import blogs
@@ -19,7 +19,8 @@ def result():
         result=user.login(username1,password1)
         if result==False:
             return render_template("start.html")
-        return render_template("result.html",result=result )
+        message=""
+        return render_template("result.html",result=result,message=message)
 
 @app.route("/new_user", methods=["POST"])
 def new_user():
@@ -38,12 +39,29 @@ def Blog():
          list=blogs.find_all_Life_blogname()
          return render_template("Blog.html",community="Life",list=list)
      if community=="3":
-         return render_template("Blog.html",community="Sport")
+         list=blogs.find_all_sport_blogname()
+         return render_template("Blog.html",community="Sport",list=list)
      if community=="4":
-         return render_template("Blog.html",community="Game")
+         list=blogs.find_all_game_blogname()
+         return render_template("Blog.html",community="Game",list=list)
 
 @app.route("/Blog2")
 def Blog2():
     community = request.args.get('community')
     blog_name = request.args.get('blog_name')
     return render_template("Blog2.html",community=community,blog_name=blog_name)
+
+@app.route("/new_blog")
+def new_blog():
+    return render_template("new.html")
+
+@app.route("/create", methods=["POST"])
+def create():
+    topic = request.form["topic"]
+    community=request.form["community"]
+    content=request.form["content"]
+    if community=="1":
+        blogs.create_school_blog(topic,content)
+    result=session["username"]
+    message="blog added"
+    return  render_template("result.html",result=result,message=message)

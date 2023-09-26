@@ -1,17 +1,24 @@
 from db import db
 from sqlalchemy import text
+from werkzeug.security import check_password_hash, generate_password_hash
+from flask import session
 
 def login(username1,password1):
-    query = text("SELECT * FROM users WHERE username=:username1 AND password=:password1")
-    right_user = db.session.execute(query, {"username1": username1, "password1": password1})
-    number=right_user.fetchall()
+    query = text("SELECT * FROM users WHERE username=:username1")
+    right_user = db.session.execute(query, {"username1": username1})
+    number=right_user.fetchone()
     sign_in=False
     if len(number)==0:
         return False
     if len(number)!=0:
-        return True
+        hash_value=number.password
+        if check_password_hash(hash_value, password1):
+            session["username"]=username1
+            return True
+    return False
 
 def new_user(username,password):
+    hash_value = generate_password_hash(password)
     query = text("INSERT INTO users (username,password) VALUES (:username,:password)")
-    right_user = db.session.execute(query, {"username": username, "password": password})
+    right_user = db.session.execute(query, {"username": username, "password": hash_value})
     db.session.commit()
