@@ -8,6 +8,11 @@ import blogs
 def index():
     return render_template("start.html")
 
+@app.route("/logout")
+def logout():
+    del session["username"]
+    return redirect("/")
+
 @app.route("/result", methods=["POST"])
 def result():
     username1 = request.form["username"]
@@ -18,9 +23,11 @@ def result():
     if button_pressed == "next":
         result=user.login(username1,password1)
         if result==False:
-            return render_template("start.html")
+            return redirect("/")
         message=""
-        return render_template("result.html",result=result,message=message)
+        session["username"]=username1
+        session["community"]=""
+        return redirect("/")
 
 @app.route("/new_user", methods=["POST"])
 def new_user():
@@ -29,27 +36,34 @@ def new_user():
     right=user.new_user(new_username,new_password)
     return redirect("/")
 
-@app.route("/Blog", methods=["POST"])
+@app.route("/Blog", methods=["POST","Get"])
 def Blog():
-     community = request.form["community"]
-     if community=="1":
+     if session["community"]=="":
+         community = request.form["community"]
+         session["community"]=community
+     if session["community"]=="1":
          list=blogs.find_all_school_blogname()
          return render_template("Blog.html",community="School",list=list)
-     if community=="2":
+     if session["community"]=="2":
          list=blogs.find_all_Life_blogname()
          return render_template("Blog.html",community="Life",list=list)
-     if community=="3":
+     if session["community"]=="3":
          list=blogs.find_all_sport_blogname()
          return render_template("Blog.html",community="Sport",list=list)
-     if community=="4":
+     if session["community"]=="4":
          list=blogs.find_all_game_blogname()
          return render_template("Blog.html",community="Game",list=list)
 
 @app.route("/Blog2")
 def Blog2():
+    button= request.args.get("find")
     community = request.args.get('community')
-    blog_name = request.args.get('blog_name')
-    return render_template("Blog2.html",community=community,blog_name=blog_name)
+    if button=="send":
+        blog_name = request.args.get('query')
+        return render_template("Blog2.html",community=community,blog_name=blog_name)
+    else:
+        blog_name = request.args.get('blog_name')
+        return render_template("Blog2.html",community=community,blog_name=blog_name)
 
 @app.route("/new_blog")
 def new_blog():
@@ -62,6 +76,5 @@ def create():
     content=request.form["content"]
     if community=="1":
         blogs.create_school_blog(topic,content)
-    result=session["username"]
     message="blog added"
-    return  render_template("result.html",result=result,message=message)
+    return  render_template("result.html",message=message)

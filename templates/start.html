@@ -1,3 +1,20 @@
+{% if session.username %}
+<p>You have signed in {{ session.username }}</p>
+<form action="/Blog" method="POST">
+moi
+Welcome to the blog. Choice one community.
+<p>
+<input type="radio" name="community" value="1">School
+<input type="radio" name="community" value="2">Life
+<input type="radio" name="community" value="3">Sport
+<input type="radio" name="community" value="4">Game
+<p>
+<a href="/new_blog">new blog</a>
+<input type="submit" value="send">
+<p>
+{{message}}
+<a href="/logout">Logout</a>
+{% else %}
 <form action="/result" method="POST">
 <title>Front page</title>
 <h1>Front page</h1>
@@ -10,4 +27,5 @@
 <input type="submit" name="button" value="next">
 <input type="submit" name="button" value="new">
 </p>
-
+</form>
+{% endif %}
