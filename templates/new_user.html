@@ -2,9 +2,16 @@
 <b>Welcome</b> <i>to the blog</i>!
 <i>new user</i>!
 <p>
+Write the username:
 <textarea name="new username" rows="1" cols="30"></textarea>
+<br>
+Write the password:
 <textarea name="new password" rows="1" cols="30"></textarea>
-
-<input type="submit" value="next">
+<br>
+password should be atleat 5 mark long and username should be uneque
+<br>
+<input type="submit" value="create">
 <p>
 <a href="/">Back</a>
+{% block content %}{% endblock %}
+</form>

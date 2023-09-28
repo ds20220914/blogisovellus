@@ -18,12 +18,12 @@ def result():
     username1 = request.form["username"]
     password1 = request.form["password"]
     button_pressed = request.form.get("button")
-    if button_pressed == "new":
+    if button_pressed == "create new user":
         return render_template("new_user.html")
-    if button_pressed == "next":
+    if button_pressed == "sign in":
         result=user.login(username1,password1)
         if result==False:
-            return redirect("/")
+            return render_template("error.html",message="username or password wrong, try again")
         message=""
         session["username"]=username1
         session["community"]=""
@@ -34,7 +34,10 @@ def new_user():
     new_username=request.form["new username"]
     new_password=request.form["new password"]
     right=user.new_user(new_username,new_password)
-    return redirect("/")
+    if right==True:
+        return redirect("/")
+    if right==False:
+        return render_template("error2.html",message="username is already exist or password is too short")
 
 @app.route("/Blog", methods=["POST","Get"])
 def Blog():

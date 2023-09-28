@@ -10,22 +10,30 @@ Welcome to the blog. Choice one community.
 <input type="radio" name="community" value="4">Game
 <p>
 <a href="/new_blog">new blog</a>
-<input type="submit" value="send">
-<p>
+<br>
+<input type="submit" value="go">
+<br>
 {{message}}
 <a href="/logout">Logout</a>
+
 {% else %}
+
 <form action="/result" method="POST">
 <title>Front page</title>
 <h1>Front page</h1>
 <b>Welcome</b> <i>to the blog</i>!
 <i>sign in</i>!
 <p>
+Username:
 <textarea name="username" rows="1" cols="30"></textarea>
+<br>
+Password:
 <textarea name="password" rows="1" cols="30"></textarea>
-
-<input type="submit" name="button" value="next">
-<input type="submit" name="button" value="new">
+<br>
+<input type="submit" name="button" value="sign in">
+<br>
+<input type="submit" name="button" value="create new user">
 </p>
+{% block content %}{% endblock %}
 </form>
 {% endif %}
