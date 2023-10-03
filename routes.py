@@ -4,6 +4,7 @@ import user
 from flask_sqlalchemy import SQLAlchemy
 import blogs
 
+
 @app.route("/")
 def index():
     return render_template("start.html")
@@ -81,3 +82,4 @@ def create():
         blogs.create_school_blog(topic,content)
     message="blog added"
     return  render_template("result.html",message=message)
+.
