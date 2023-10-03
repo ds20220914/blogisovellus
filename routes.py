@@ -82,4 +82,4 @@ def create():
         blogs.create_school_blog(topic,content)
     message="blog added"
     return  render_template("result.html",message=message)
-.
+
