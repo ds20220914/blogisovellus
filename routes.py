@@ -64,10 +64,25 @@ def Blog2():
     community = request.args.get('community')
     if button=="send":
         blog_name = request.args.get('query')
-        return render_template("Blog2.html",community=community,blog_name=blog_name)
+        if community=="School":
+            list=blogs.find_all_school_blog_byname(blog_name)
+            return render_template("Blog.html",community="School",list=list)
+        if community=="Life":
+            list=blogs.find_all_Life_blog_byname(blog_name)
+            return render_template("Blog.html",community="Life",list=list)
+        if community=="Sport":
+            list=blogs.find_all_sport_blog_byname(blog_name)
+            return render_template("Blog.html",community="Sport",list=list)
+        if community=="Game":
+            list=blogs.find_all_game_blog_byname(blog_name)
+            return render_template("Blog.html",community="Game",list=list)
+
+        
     else:
         blog_name = request.args.get('blog_name')
-        return render_template("Blog2.html",community=community,blog_name=blog_name)
+        blog_id = request.args.get('blog_id')
+        message=blogs.find_text(blog_name,blog_id)
+        return render_template("Blog2.html",community=community,blog_name=blog_name,message=message[0])
 
 @app.route("/new_blog")
 def new_blog():
@@ -81,5 +96,5 @@ def create():
     if community=="1":
         blogs.create_school_blog(topic,content)
     message="blog added"
-    return  render_template("result.html",message=message)
+    return  redirect("/Blog")
 

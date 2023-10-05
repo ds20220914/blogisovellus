@@ -11,7 +11,7 @@ Find blog <input type="text" name="query">
 <hr>
 {% for name in list %}
     {{name[0]}}
-    <a href="/Blog2?community={{ community }}&blog_name={{ name[0] }}">Go to blog</a>
+    <a href="/Blog2?community={{ community }}&blog_name={{ name[0] }}&blog_id={{name[1]}}">Go to blog</a>
 <hr>
 {% endfor %}
 <a href="/">Back</a>

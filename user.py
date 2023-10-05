@@ -6,11 +6,11 @@ from flask import session
 def login(username1,password1):
     if len(username1)==0 or len(password1) ==0:
         return False
-    query = text("SELECT * FROM users WHERE username=:username1")
+    query = text("SELECT * FROM Users WHERE username=:username1")
     right_user = db.session.execute(query, {"username1": username1})
     number=right_user.fetchone()
     sign_in=False
-    if len(number)==0:
+    if number==None:
         return False
     if len(number)!=0:
         hash_value=number.password
@@ -22,13 +22,13 @@ def login(username1,password1):
 def new_user(username,password):
     if len(password)<5:
         return False
-    query = text("SELECT * FROM users WHERE username=:username1")
+    query = text("SELECT * FROM Users WHERE username=:username1")
     right_user = db.session.execute(query, {"username1": username})
     number=right_user.fetchall()
     if len(number)>0:
         return False
     hash_value = generate_password_hash(password)
-    query = text("INSERT INTO users (username,password) VALUES (:username,:password)")
+    query = text("INSERT INTO Users (username,password) VALUES (:username,:password)")
     right_user = db.session.execute(query, {"username": username, "password": hash_value})
     db.session.commit()
     return True
