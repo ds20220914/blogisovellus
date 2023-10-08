@@ -14,7 +14,11 @@ Sovelluksen ominaisuuksia ovat:
 - Käyttäjä näkee oman profiilissa kaikki postamansa blogeja. 
 - käyttäjä voi poista omia blogeja. 
 
-Tällä hetkellä sovellus on vielä kesken. Sisäänkirjautumisen perustoiminnot ovat valmis ja sisäänkirjautumisen tietokanta luotu. 
+Tällä hetkellä sovellus on melkein valmis. Sisäänkirjautumisen perustoiminnot ovat valmis ja sisäänkirjautumisen tietokanta luotu. 
 Eri blogi yhteisön valinta sisäänkirjautumisen jälkeen on luotu. Ja yhteisön valinnan jälkeen näkyy kaikki kyseisen yhteisön blogit.
 Painamalla blogin nimi näet blogin sisältö.
-Aion testata sovelluksen tuotannosta Fly.io avulla.
+Kommentin liityvät toiminnot ovat vielä kesken. 
+
+Sovellus on testattavissa fly.ion kautta. 
+https://web-blog.fly.dev/
+. 
