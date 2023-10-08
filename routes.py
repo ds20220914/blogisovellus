@@ -40,9 +40,9 @@ def new_user():
     if right==False:
         return render_template("error2.html",message="username is already exist or password is too short")
 
-@app.route("/Blog", methods=["POST","Get"])
+@app.route("/Blog",methods=["POST","GET"])
 def Blog():
-     if session["community"]=="":
+     if request.method=="POST":
          community = request.form["community"]
          session["community"]=community
      if session["community"]=="1":
@@ -61,28 +61,29 @@ def Blog():
 @app.route("/Blog2")
 def Blog2():
     button= request.args.get("find")
-    community = request.args.get('community')
+    community = session["community"]
     if button=="send":
         blog_name = request.args.get('query')
-        if community=="School":
+        if community=="1":
             list=blogs.find_all_school_blog_byname(blog_name)
             return render_template("Blog.html",community="School",list=list)
-        if community=="Life":
+        if community=="2":
             list=blogs.find_all_Life_blog_byname(blog_name)
             return render_template("Blog.html",community="Life",list=list)
-        if community=="Sport":
+        if community=="3":
             list=blogs.find_all_sport_blog_byname(blog_name)
             return render_template("Blog.html",community="Sport",list=list)
-        if community=="Game":
+        if community=="4":
             list=blogs.find_all_game_blog_byname(blog_name)
             return render_template("Blog.html",community="Game",list=list)
 
         
     else:
-        blog_name = request.args.get('blog_name')
         blog_id = request.args.get('blog_id')
-        message=blogs.find_text(blog_name,blog_id)
-        return render_template("Blog2.html",community=community,blog_name=blog_name,message=message[0])
+        message=blogs.find_text(community,blog_id)
+        blog_name=request.args.get('blog_name')
+        comments=blogs.find_comments(community,blog_id)
+        return render_template("Blog2.html",blog_id=blog_id,community=community,blog_name=blog_name,message=message[0])
 
 @app.route("/new_blog")
 def new_blog():
@@ -98,3 +99,20 @@ def create():
     message="blog added"
     return  redirect("/Blog")
 
+@app.route("/add_comment", methods=["POST","GET"])
+def add_comment():
+    community=session["community"]
+    id=request.form["blog_id"]
+    blog_name=request.form["blog_name"]
+    return render_template("new_comment.html",community=community,id=id,blog_name=blog_name)
+
+@app.route("/add_comment2", methods=["POST","GET"])
+def add_comment2():
+    community=session["community"]
+    blog_id=request.form["blog_id"]
+    content=request.form["query"]
+    blog_name=request.form["blog_name"]
+    blogs.add_comment(community,id,content)
+    message=blogs.find_text(community,id)
+    comments=blogs.find_comments(community,id)
+    return render_template("Blog2.html",community=community,blog_id=blog_id,blog_name=blog_name,message=message[0],comments=comments)
