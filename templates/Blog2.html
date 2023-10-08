@@ -2,4 +2,17 @@ hello!
 {{community}}
 {{blog_name}}
 {{message}}
+{{blog_id}}
+<br>
+{% if comments %}
+{% for comment in comments %}
+    {{comment[0]}}
+<br>
+{% endfor %}
+{% endif %}
+<a href="/add_comment">add comment</a>
+<input type="hidden" name="community" value="{{ community }}">
+<input type="hidden" name="blog_id" value="{{ blog_id }}">
+<br>
 <a href="/Blog">Back</a>
+</form>
