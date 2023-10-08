@@ -102,9 +102,9 @@ def create():
 @app.route("/add_comment", methods=["POST","GET"])
 def add_comment():
     community=session["community"]
-    id=request.form["blog_id"]
-    blog_name=request.form["blog_name"]
-    return render_template("new_comment.html",community=community,id=id,blog_name=blog_name)
+    blog_id=request.args.get("blog_id")
+    blog_name=request.args.get("blog_name")
+    return render_template("new_comment.html",community=community,blog_id=blog_id,blog_name=blog_name)
 
 @app.route("/add_comment2", methods=["POST","GET"])
 def add_comment2():
@@ -112,7 +112,7 @@ def add_comment2():
     blog_id=request.form["blog_id"]
     content=request.form["query"]
     blog_name=request.form["blog_name"]
-    blogs.add_comment(community,id,content)
-    message=blogs.find_text(community,id)
-    comments=blogs.find_comments(community,id)
+    blogs.add_comment(community,blog_id,content)
+    message=blogs.find_text(community,blog_id)
+    comments=blogs.find_comments(community,blog_id)
     return render_template("Blog2.html",community=community,blog_id=blog_id,blog_name=blog_name,message=message[0],comments=comments)
