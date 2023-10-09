@@ -23,3 +23,4 @@ blogin poistaminen on kesken.
 Sovellus on testattavissa fly.ion kautta. 
 https://web-blog.fly.dev/
 . 
+huomaa, etta fly.io:ssa oleva versio ei ole vielä päivitetty, joten kannattaa kokeilla paikallinen versio githubissa. 
