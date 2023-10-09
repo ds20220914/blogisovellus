@@ -1,0 +1,35 @@
+hello
+<hr>
+{% for school_blog in list[0] %}
+    <br>
+    id:{{school_blog[0]}}
+    name:{{school_blog[1]}}
+    time:{{school_blog[3]}}
+    <br>
+{% endfor %}
+<hr>
+{% for life_blog in list[1] %}
+    <br>
+    id:{{life_blog[0]}}
+    name:{{life_blog[1]}}
+    time:{{life_blog[3]}}
+    <br>
+{% endfor %}
+<hr>
+{% for sport_blog in list[2] %}
+    <br>
+    id:{{sport_blog[0]}}
+    name:{{sport_blog[1]}}
+    time:{{sport_blog[3]}}
+    <br>
+{% endfor %}
+<hr>
+{% for game_blog in list[3] %}
+    <br>
+    id:{{game_blog[0]}}
+    name:{{game_blog[1]}}
+    time:{{game_blog[3]}}
+    <br>
+{% endfor %}
+{{list}}    
+<a href="/">Back</a>

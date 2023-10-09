@@ -94,8 +94,9 @@ def create():
     topic = request.form["topic"]
     community=request.form["community"]
     content=request.form["content"]
+    user=session["username"]
     if community=="1":
-        blogs.create_school_blog(topic,content)
+        blogs.create_school_blog(topic,content,user)
     message="blog added"
     return  redirect("/Blog")
 
@@ -116,3 +117,9 @@ def add_comment2():
     message=blogs.find_text(community,blog_id)
     comments=blogs.find_comments(community,blog_id)
     return render_template("Blog2.html",community=community,blog_id=blog_id,blog_name=blog_name,message=message[0],comments=comments)
+@app.route("/all_my_blogs",methods=["GET"])
+def all_my_blogs():
+    username=session["username"]
+    list=blogs.all_my_blogs(username)
+    return render_template("all_my_blogs.html",list=list)
+    
