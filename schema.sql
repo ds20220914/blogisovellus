@@ -7,26 +7,34 @@ CREATE TABLE Users (
 CREATE TABLE School (
     id SERIAL PRIMARY KEY,
     Blog_name TEXT,
-    Blog_text TEXT
+    content TEXT,
+    time    TIMESTAMP,
+    writer TEXT
 );
 
 CREATE TABLE Life (
     id SERIAL PRIMARY KEY,
     Blog_name TEXT,
-    Blog_text TEXT
+    content TEXT,
+    time    TIMESTAMP,
+    writer  TEXT
 );
 
 
 CREATE TABLE Sport (
     id SERIAL PRIMARY KEY,
     Blog_name TEXT,
-    Blog_text TEXT
+    content TEXT,
+    time   TIMESTAMP,
+    writer TEXT
 );
 
 CREATE TABLE Game (
     id SERIAL PRIMARY KEY,
     Blog_name TEXT,
-    Blog_text TEXT
+    content TEXT,
+    time TIMESTAMP,
+    writer TEXT
 );
 
 CREATE TABLE School_comment (
