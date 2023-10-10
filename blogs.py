@@ -55,25 +55,25 @@ def find_text(community,id ):
         return blog
 
 def find_all_school_blog_byname(name):
-    query = text("SELECT blog_name FROM school WHERE Blog_name=:Blog_name")
+    query = text("SELECT blog_name,id FROM school WHERE Blog_name=:Blog_name")
     right_blogs = db.session.execute(query,{"Blog_name":name})
     blogs=right_blogs.fetchall()
     return blogs
 
 def find_all_Life_blog_byname(name):
-    query = text("SELECT blog_name FROM life WHERE Blog_name=:Blog_name")
+    query = text("SELECT blog_name,id FROM life WHERE Blog_name=:Blog_name")
     right_blogs = db.session.execute(query,{"Blog_name":name})
     blogs=right_blogs.fetchall()
     return blogs
 
 def find_all_Sport_blog_byname(name):
-    query = text("SELECT blog_name FROM sport WHERE Blog_name=:Blog_name")
+    query = text("SELECT blog_name,id FROM sport WHERE Blog_name=:Blog_name")
     right_blogs = db.session.execute(query,{"Blog_name":name})
     blogs=right_blogs.fetchall()
     return blogs
 
 def find_all_Game_blog_byname(name):
-    query = text("SELECT blog_name FROM game WHERE Blog_name=:Blog_name")
+    query = text("SELECT blog_name,id FROM game WHERE Blog_name=:Blog_name")
     right_blogs = db.session.execute(query,{"Blog_name":name})
     blogs=right_blogs.fetchall()
     return blogs

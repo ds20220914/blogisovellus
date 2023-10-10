@@ -60,5 +60,3 @@ CREATE TABLE game_comment (
     Blog_id TEXT,
     content TEXT
 );
-
-
