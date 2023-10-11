@@ -30,6 +30,10 @@ def create_school_blog(topic,content,writer):
     sql =text( "INSERT INTO school (blog_name, content,time,writer) VALUES (:topic, :content,NOW(),:writer)")
     result = db.session.execute(sql, {"topic":topic,"content":content,"writer":writer})
     db.session.commit()
+def create_life_blog(topic,content,writer):
+    sql =text( "INSERT INTO life (blog_name, content,time,writer) VALUES (:topic, :content,NOW(),:writer)")
+    result = db.session.execute(sql, {"topic":topic,"content":content,"writer":writer})
+    db.session.commit()
 
 def find_text(community,id ):
     if community=="1":
@@ -110,13 +114,31 @@ def all_my_blogs(username):
     if len(blogs2)==0:
         list.append([])
     if len(blogs2)!=0:
-        list.append(blogs1)
+        list.append(blogs2)
     if len(blogs3)==0:
         list.append([])
     if len(blogs3)!=0:
-        list.append(blogs1)
+        list.append(blogs3)
     if len(blogs4)==0:
         list.append([])
     if len(blogs4)!=0:
-        list.append(blogs1)
+        list.append(blogs4)
     return list
+def delete_school_blog(id):
+    query = text(" DELETE FROM school WHERE id=:id ")
+    delete = db.session.execute(query,{"id":id})
+    db.session.commit()
+
+def delete_life_blog(id):
+    query = text(" DELETE FROM life WHERE id=:id ")
+    delete = db.session.execute(query,{"id":id})
+    db.session.commit()
+
+def delete_sport_blog(id):
+    query = text(" DELETE FROM sport WHERE id=:id ")
+    delete = db.session.execute(query,{"id":id})
+    db.session.commit()
+def delete_game_blog(id):
+    query = text(" DELETE FROM game WHERE id=:id ")
+    delete = db.session.execute(query,{"id":id})
+    db.session.commit()

@@ -58,7 +58,7 @@ def Blog():
          list=blogs.find_all_game_blogname()
          return render_template("Blog.html",community="Game",list=list)
 
-@app.route("/Blog2")
+@app.route("/Blog2",methods=["POST","GET"])
 def Blog2():
     button= request.args.get("find")
     community = session["community"]
@@ -97,8 +97,10 @@ def create():
     user=session["username"]
     if community=="1":
         blogs.create_school_blog(topic,content,user)
+    if community=="2":
+        blogs.create_life_blog(topic,content,user)
     message="blog added"
-    return  redirect("/Blog")
+    return   render_template("start.html")
 
 @app.route("/add_comment", methods=["POST","GET"])
 def add_comment():
@@ -117,8 +119,22 @@ def add_comment2():
     message=blogs.find_text(community,blog_id)
     comments=blogs.find_comments(community,blog_id)
     return render_template("Blog2.html",community=community,blog_id=blog_id,blog_name=blog_name,message=message[0],comments=comments)
-@app.route("/all_my_blogs",methods=["GET"])
+@app.route("/all_my_blogs",methods=["POST","GET"])
 def all_my_blogs():
+    if request.method=="POST":
+        if "school" in request.form:
+            delete=request.form["school"]
+            blogs.delete_school_blog(delete)
+        if "life" in request.form:
+            delete=request.form["life"]
+            blogs.delete_life_blog(delete)
+        if "sport" in request.form:
+            delete=request.form["sport"]
+            blogs.delete_sport_blog(delete)
+        if "game" in request.form:
+            delete=request.form["game"]
+            blogs.delete_game_blog(delete)
+
     username=session["username"]
     list=blogs.all_my_blogs(username)
     return render_template("all_my_blogs.html",list=list)
