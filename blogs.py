@@ -36,23 +36,23 @@ def create_life_blog(topic,content,writer):
     db.session.commit()
 
 def find_text(community,id ):
-    if community=="1":
+    if community=="School":
         query = text("SELECT content FROM school WHERE id=:id")
         right_blogs = db.session.execute(query,{"id":id})
         blog=right_blogs.fetchone()
         return blog
-    if community=="2":
+    if community=="Life":
         query = text("SELECT content FROM life WHERE id=:id")
         right_blogs = db.session.execute(query,{"id":id})
         blog=right_blogs.fetchone()
         return blog
-    if community=="3":
+    if community=="Sport":
         query = text("SELECT content FROM sport WHERE id=:id")
         right_blogs = db.session.execute(query,{"id":id})
         blog=right_blogs.fetchone()
         return blog
 
-    if community=="4":
+    if community=="Game":
         query = text("SELECT content FROM game WHERE id=:id")
         right_blogs = db.session.execute(query,{"id":id})
         blog=right_blogs.fetchone()

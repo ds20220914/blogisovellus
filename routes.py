@@ -79,6 +79,16 @@ def Blog2():
 
         
     else:
+        community=request.args.get('community')
+        if session["community"]=="":
+            if community=="School":
+                session["community"]="1"
+            if community=="Life":
+                session["community"]="2"
+            if community=="Sport":
+                session["community"]="3"
+            if community=="Game":
+                session["community"]="4"
         blog_id = request.args.get('blog_id')
         message=blogs.find_text(community,blog_id)
         blog_name=request.args.get('blog_name')
@@ -137,5 +147,9 @@ def all_my_blogs():
 
     username=session["username"]
     list=blogs.all_my_blogs(username)
-    return render_template("all_my_blogs.html",list=list)
+    commu1="School"
+    commu2="Life"
+    commu3="Game"
+    commu4="Sport"
+    return render_template("all_my_blogs.html",list=list,commu1=commu1,commu2=commu2,commu3=commu3,commu4=commu4)
     

@@ -6,8 +6,9 @@ hello
     id:{{school_blog[0]}}
     name:{{school_blog[1]}}
     post time:{{school_blog[3]}}
+    {{commu1}}
     <input type="checkbox" name="school" value="{{school_blog[0]}}">
-    <a href="/Blog2?community=school&blog_name={{school_blog[1] }}&blog_id={{school_blog[0]}}">Go to blog</a>
+    <a href="/Blog2?community={{commu1}}&blog_name={{school_blog[1] }}&blog_id={{school_blog[0]}}">Go to blog</a>
     <br>
 {% endfor %}
 <hr>
@@ -17,7 +18,7 @@ hello
     name:{{life_blog[1]}}
     post time:{{life_blog[3]}}
     <input type="checkbox" name="life" value="{{life_blog[0]}}">
-    <a href="/Blog2?community=life&blog_name={{life_blog[1] }}&blog_id={{life_blog[0]}}">Go to blog</a>
+    <a href="/Blog2?community={{commu2}}&blog_name={{life_blog[1] }}&blog_id={{life_blog[0]}}">Go to blog</a>
     <br>
 {% endfor %}
 <hr>
@@ -27,7 +28,7 @@ hello
     name:{{sport_blog[1]}}
     post time:{{sport_blog[3]}}
     <input type="checkbox" name="sport" value="{{sport_blog[0]}}">
-    <a href="/Blog2?community=sport&blog_name={{sport_blog[1] }}&blog_id={{sport_blog[0]}}">Go to blog</a>
+    <a href="/Blog2?community={{commu3}}&blog_name={{sport_blog[1] }}&blog_id={{sport_blog[0]}}">Go to blog</a>
     <br>
 {% endfor %}
 <hr>
@@ -37,7 +38,7 @@ hello
     name:{{game_blog[1]}}
     post time:{{game_blog[3]}}
     <input type="checkbox" name="game" value="{{game_blog[0]}}">
-    <a href="/Blog2?community=game&blog_name={{game_blog[1] }}&blog_id={{game_blog[0]}}">Go to blog</a>
+    <a href="/Blog2?community={{commu4}}&blog_name={{game_blog[1] }}&blog_id={{game_blog[0]}}">Go to blog</a>
     <br>
 {% endfor %}
 <hr>
