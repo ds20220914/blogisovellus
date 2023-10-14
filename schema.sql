@@ -4,59 +4,19 @@ CREATE TABLE Users (
 );
 
 
-CREATE TABLE School (
+CREATE TABLE Blogs (
     id SERIAL PRIMARY KEY,
     Blog_name TEXT,
     content TEXT,
     time    TIMESTAMP,
-    writer TEXT
+    user_id TEXT REFERENCES users ON DELETE CASCADE,
+    community TEXT
 );
 
-CREATE TABLE Life (
+CREATE TABLE Comments (
     id SERIAL PRIMARY KEY,
-    Blog_name TEXT,
-    content TEXT,
-    time    TIMESTAMP,
-    writer  TEXT
-);
-
-
-CREATE TABLE Sport (
-    id SERIAL PRIMARY KEY,
-    Blog_name TEXT,
-    content TEXT,
-    time   TIMESTAMP,
-    writer TEXT
-);
-
-CREATE TABLE Game (
-    id SERIAL PRIMARY KEY,
-    Blog_name TEXT,
-    content TEXT,
-    time TIMESTAMP,
-    writer TEXT
-);
-
-CREATE TABLE School_comment (
-    id SERIAL PRIMARY KEY,
-    Blog_id TEXT,
+    Blog_id TEXT REFERENCES Blogs ON DELETE CASCADE,
     content TEXT
 );
 
-CREATE TABLE life_comment (
-    id SERIAL PRIMARY KEY,
-    Blog_id TEXT,
-    content TEXT
-);
 
-CREATE TABLE sport_comment (
-    id SERIAL PRIMARY KEY,
-    Blog_id TEXT,
-    content TEXT
-);
-
-CREATE TABLE game_comment (
-    id SERIAL PRIMARY KEY,
-    Blog_id TEXT,
-    content TEXT
-);
