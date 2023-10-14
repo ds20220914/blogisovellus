@@ -35,6 +35,7 @@ def find_all_blogs_byname(name,community):
 def add_comment(id,content):
     query = text(" INSERT INTO Comments (Blog_id,content) VALUES (:id , :content)")
     right_blogs = db.session.execute(query,{"id":id, "content":content})
+    db.session.commit()
 
 def find_comments(id):
     query = text(" SELECT content FROM Comments WHERE Blog_id=:id ")

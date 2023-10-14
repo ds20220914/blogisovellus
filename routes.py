@@ -68,7 +68,7 @@ def Blog2():
         message=blogs.find_text(community,blog_id)
         blog_name=request.args.get('blog_name')
         comments=blogs.find_comments(blog_id)
-        return render_template("Blog2.html",blog_id=blog_id,community=community,blog_name=blog_name,message=message[0])
+        return render_template("Blog2.html",blog_id=blog_id,community=community,blog_name=blog_name,message=message[0],comments=comments)
 
 @app.route("/new_blog")
 def new_blog():
