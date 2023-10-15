@@ -20,3 +20,13 @@ CREATE TABLE Comments (
 );
 
 
+CREATE TABLE Admin (
+    id SERIAL PRIMARY KEY,
+    admin_id TEXT REFERENCES Users ON DELETE CASCADE
+);
+
+CREATE TABLE Private_blogs (
+    id SERIAL PRIMARY KEY,
+    private_blog_id TEXT REFERENCES Blogs ON DELETE CASCADE,
+    salasana TEXT
+);

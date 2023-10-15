@@ -107,13 +107,17 @@ def all_my_blogs():
     if request.method=="POST":
         delete=request.form.getlist("id")
         blogs.delete_blog(delete)
-
-    username=session["username"]
-    userid=blogs.find_userid_by_name(username)
-    list=blogs.all_my_blogs(userid[0])
     commu1="school"
     commu2="life"
     commu3="game"
     commu4="sport"
+    username=session["username"]
+    id=blogs.find_userid_by_name(username)
+    admin=blogs.check_if_admin(id)
+    if len(admin)!=0:
+        list=blogs.find_all_all_blogs()
+        return render_template("all_my_blogs.html",list=list,commu1=commu1,commu2=commu2,commu3=commu3,commu4=commu4)
+    userid=blogs.find_userid_by_name(username)
+    list=blogs.all_my_blogs(userid[0])
     return render_template("all_my_blogs.html",list=list,commu1=commu1,commu2=commu2,commu3=commu3,commu4=commu4)
     

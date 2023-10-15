@@ -80,4 +80,28 @@ def delete_blog(id):
         delete = db.session.execute(query,{"i":i})
         db.session.commit()
 
+def find_all_all_blogs():
+    list=[]
+    query1 = text("SELECT * FROM Blogs WHERE community=:school")
+    right_blogs1 = db.session.execute(query1,{"school":"school"})
+    query2 = text("SELECT * FROM Blogs WHERE community=:life")
+    right_blogs2 = db.session.execute(query2,{"life":"life"})
+    query3 = text("SELECT * FROM Blogs WHERE community=:sport")
+    right_blogs3 = db.session.execute(query3,{"sport":"sport"})
+    query4 = text("SELECT * FROM Blogs WHERE community=:game")
+    right_blogs4 = db.session.execute(query4,{"game":"game"})
+    blogs1=right_blogs1.fetchall()
+    blogs2=right_blogs2.fetchall()
+    blogs3=right_blogs3.fetchall()
+    blogs4=right_blogs4.fetchall()
+    list.append(blogs1)
+    list.append(blogs2)
+    list.append(blogs3)
+    list.append(blogs4)
+    return list
+def check_if_admin(id):
+    query = text("SELECT id FROM Admin WHERE admin_id=:id ")
+    admin = db.session.execute(query,{"id":id[0]})
+    admin_id=admin.fetchall()
+    return admin_id
 
