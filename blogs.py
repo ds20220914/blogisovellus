@@ -105,3 +105,26 @@ def check_if_admin(id):
     admin_id=admin.fetchall()
     return admin_id
 
+def recently_added_blog(user):
+    query1 = text("SELECT MAX(id) FROM Blogs WHERE user_id=:id ")
+    right_blogs1 = db.session.execute(query1,{"id":user})
+    id=right_blogs1.fetchone()
+    return id 
+
+def add_blog_password(id,password):
+    query1 = text("INSERT INTO Private_blogs (private_blog_id,password) VALUES (:id,:password) ")
+    private = db.session.execute(query1,{"id":id, "password":password})
+    db.session.commit()
+
+def check_if_blog_password(blog_id):
+    query1 = text("SELECT password FROM Private_blogs WHERE private_blog_id=:id ")
+    right_blogs1 = db.session.execute(query1,{"id":blog_id})
+    password=right_blogs1.fetchone()
+    return password 
+
+def find_writer_name(id):
+    query1 = text("SELECT U.username FROM Users U, Blogs B WHERE B.user_id=U.id ")
+    right_name = db.session.execute(query1)
+    name=right_name.fetchone()
+    return name 
+

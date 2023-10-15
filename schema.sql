@@ -9,24 +9,24 @@ CREATE TABLE Blogs (
     Blog_name TEXT,
     content TEXT,
     time    TIMESTAMP,
-    user_id TEXT REFERENCES users ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users ON DELETE CASCADE,
     community TEXT
 );
 
 CREATE TABLE Comments (
     id SERIAL PRIMARY KEY,
-    Blog_id TEXT REFERENCES Blogs ON DELETE CASCADE,
+    Blog_id INTEGER REFERENCES Blogs ON DELETE CASCADE,
     content TEXT
 );
 
 
 CREATE TABLE Admin (
     id SERIAL PRIMARY KEY,
-    admin_id TEXT REFERENCES Users ON DELETE CASCADE
+    admin_id INTEGER REFERENCES Users ON DELETE CASCADE
 );
 
 CREATE TABLE Private_blogs (
     id SERIAL PRIMARY KEY,
-    private_blog_id TEXT REFERENCES Blogs ON DELETE CASCADE,
-    salasana TEXT
+    private_blog_id INTEGER REFERENCES Blogs ON DELETE CASCADE,
+    password TEXT
 );

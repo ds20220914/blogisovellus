@@ -68,7 +68,26 @@ def Blog2():
         message=blogs.find_text(community,blog_id)
         blog_name=request.args.get('blog_name')
         comments=blogs.find_comments(blog_id)
+        blog_password=blogs.check_if_blog_password(blog_id)
+        writer_name=blogs.find_writer_name(blog_id)
+        
+        if blog_password!=None and session["username"]!="admin1" and writer_name[0]!=session["username"]:
+            return render_template("private.html",passw=blog_password[0],blog_id=blog_id,community=community,blog_name=blog_name,message=message[0])
+
         return render_template("Blog2.html",blog_id=blog_id,community=community,blog_name=blog_name,message=message[0],comments=comments)
+
+
+@app.route("/check_password",methods=["POST"])
+def check_password():
+    password=request.form["password"]
+    password1=request.form["password1"]
+    blog_id=request.form["blog_id"]
+    community=request.form["community"]
+    blog_name=request.form["blog_name"]
+    message=request.form["message"]
+    if password==password1:
+        comments=blogs.find_comments(blog_id)
+        return render_template("Blog2.html",blog_id=blog_id,community=community,blog_name=blog_name,message=message,comments=comments)
 
 @app.route("/new_blog")
 def new_blog():
@@ -81,7 +100,12 @@ def create():
     content=request.form["content"]
     user=session["username"]
     userid=blogs.find_userid_by_name(user)
+    blog_password=request.form["password"]
     blogs.create_blog(topic,content,int(userid[0]),community)
+    blog_id=blogs.recently_added_blog(userid[0])
+    if len(blog_password)!=0:
+        blogs.add_blog_password(int(blog_id[0]),blog_password)
+        
     return   render_template("start.html")
 
 @app.route("/add_comment", methods=["POST","GET"])
