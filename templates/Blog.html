@@ -1,18 +1,36 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<form action="/Blog2" method="GET">
 
-hello welcome to {{community}}!
+<body>
+  <div class="header">
+        Blog Search
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+  <div class="content">
+    <form action="/Blog2" method="GET">
 
-Find blog <input type="text" name="query">
-<br>
-<input type="hidden" name="community" value="{{ community }}">
-<input type="submit" name="find" value="search">
-<br>
-<hr>
-{% for name in list %}
-    {{name[0]}}
-    <a href="/Blog2?community={{ community }}&blog_name={{ name[0] }}&blog_id={{name[1]}}">Go to blog</a>
-<hr>
-{% endfor %}
-<a href="/">Back</a>
-</form>
+    hello welcome to {{community}}!
+
+    Find a blog <input type="text" name="query">
+    <br>
+    <input type="hidden" name="community" value="{{ community }}">
+    <input type="submit" name="find" value="search">
+    </form>
+    <hr>
+    
+      {% for name in list %}
+      <li>
+        {{name[0]}}
+        <a href="/Blog2?community={{ community }}&blog_name={{ name[0] }}&blog_id={{name[1]}}">Go to blog</a>
+      </li>
+    
+    <hr>
+    {% endfor %}
+  </div>
+</body>

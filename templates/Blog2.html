@@ -1,22 +1,47 @@
-hello!
-<br>
-community:{{community}}
-<br>
-name:{{blog_name}}
-<br>
-blog's id :{{blog_id}}
-<br>
-message:{{message}}
-<br>
-{% if comments %}
-{% for comment in comments %}
-    {{comment[0]}}
-<br>
-{% endfor %}
-{% endif %}
-<a href="/add_comment?community={{ community }}&blog_name={{ blog_name}}&blog_id={{blog_id}}">add comment</a>
-<input type="hidden" name="community" value="{{ community }}">
-<input type="hidden" name="blog_id" value="{{ blog_id }}">
-<br>
-<a href="/Blog">Back</a>
-</form>
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+<body>
+
+    <div class="header">
+        Blog Details
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/Blog">Back to Blog list</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+
+        <p>Hello!</p>
+        <p>Community: {{ community }}</p>
+        <p>Name: {{ blog_name }}</p>
+        <p>Blog's ID: {{ blog_id }}</p>
+        
+        <div class="comments-box">
+            <p>Message:</p>
+            <p>{{ message }}</p>
+        </div>
+        
+        <div class="comments-box">
+            <p>Comments:</p>
+            <ul>
+                {% if comments %}
+                    {% for comment in comments %}
+                        <li>{{ comment[0] }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>No comments yet.</li>
+                {% endif %}
+            </ul>
+        </div>
+        <a href="/add_comment?community={{ community }}&blog_name={{ blog_name}}&blog_id={{blog_id}}">add comment</a>
+        <input type="hidden" name="community" value="{{ community }}">
+        <input type="hidden" name="blog_id" value="{{ blog_id }}">
+    </div>  
+
+</body>

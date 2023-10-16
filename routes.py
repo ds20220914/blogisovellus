@@ -58,7 +58,6 @@ def Blog2():
         list=blogs.find_all_blogs_byname(blog_name,community)
         return render_template("Blog.html",community=community,list=list)
 
-
     else:
         community=request.args.get('community')
         if session["community"]=="":
