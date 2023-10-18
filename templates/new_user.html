@@ -1,17 +1,23 @@
-<form action="/new_user" method="POST">
-<b>Welcome</b> <i>to the blog</i>!
-<i>new user</i>!
-<p>
-Write the username:
-<textarea name="new username" rows="1" cols="30"></textarea>
-<br>
-Write the password:
-<textarea name="new password" rows="1" cols="30"></textarea>
-<br>
-password should be atleat 5 mark long and username should be uneque
-<br>
-<input type="submit" value="create">
-<p>
-<a href="/">Back</a>
-{% block content %}{% endblock %}
-</form>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to the Blog</h1>
+        <i>New User</i>
+    </div>
+
+    <form action="/new_user" method="POST" class="user-form">
+        <p>Write the username:</p>
+        <input type="text" name="new_username" placeholder="Username" required>
+        <p>Write the password:</p>
+        <input type="password" name="new_password" placeholder="Password" required>
+        <p>Password should be at least 5 characters long, and the username should be unique.</p>
+        <button type="submit">Create</button>
+    </form>
+   <form>
+    <a href="/">Back</a>
+   </form>
+    {% block content %}{% endblock %}
+</body>
