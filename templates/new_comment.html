@@ -1,16 +1,33 @@
-<form action="add_comment2" method="POST">
-<input type="hidden" name="blog_id" value="{{ blog_id }}">
-<input type="hidden" name="blog_name" value="{{ blog_name }}">
-<input type="hidden" name="community" value="{{ community }}">
-<br>
-community:{{community}}
-<br>
-blog's id:{{blog_id}}
-<br>
-name:{{blog_name}}
-<br>
-Write your comment here <input type="text" name="query">
-<br>
-<input type="submit" name="find" value="send the comment">
-<br>
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
+<body>
+    <div class="header">
+        Blog Comment
+    </div>
+    <div class="subheader">
+        <h2>Community: {{ community }}</h2>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Back</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <form action="add_comment2" method="POST">
+            <input type="hidden" name="blog_id" value="{{ blog_id }}">
+            <input type="hidden" name="blog_name" value="{{ blog_name }}">
+            <input type="hidden" name="community" value="{{ community }}">
+            <h2>Community: {{ community }}</h2>
+            <p>Blog's ID: {{ blog_id }}</p>
+            <p>Name: {{ blog_name }}</p>
+            <label for="query">Write your comment here:</label>
+            <input type="text" name="query" id="query">
+            <br>
+            <input type="submit" name="find" value="Send the comment">
+        </form>
+    </div>
+</body>

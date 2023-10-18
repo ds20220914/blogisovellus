@@ -1,48 +1,86 @@
-<form action="/all_my_blogs" method="POST">
-hello
-<hr>
-{% for school_blog in list[0] %}
-    <br>
-    id:{{school_blog[0]}}
-    name:{{school_blog[1]}}
-    post time:{{school_blog[3]}}
-    {{commu1}}
-    <input type="checkbox" name="id" value="{{school_blog[0]}}">
-    <a href="/Blog2?community={{commu1}}&blog_name={{school_blog[1] }}&blog_id={{school_blog[0]}}">Go to blog</a>
-    <br>
-{% endfor %}
-<hr>
-{% for life_blog in list[1] %}
-    <br>
-    id:{{life_blog[0]}}
-    name:{{life_blog[1]}}
-    post time:{{life_blog[3]}}
-    <input type="checkbox" name="id" value="{{life_blog[0]}}">
-    <a href="/Blog2?community={{commu2}}&blog_name={{life_blog[1] }}&blog_id={{life_blog[0]}}">Go to blog</a>
-    <br>
-{% endfor %}
-<hr>
-{% for sport_blog in list[2] %}
-    <br>
-    id:{{sport_blog[0]}}
-    name:{{sport_blog[1]}}
-    post time:{{sport_blog[3]}}
-    <input type="checkbox" name="id" value="{{sport_blog[0]}}">
-    <a href="/Blog2?community={{commu3}}&blog_name={{sport_blog[1] }}&blog_id={{sport_blog[0]}}">Go to blog</a>
-    <br>
-{% endfor %}
-<hr>
-{% for game_blog in list[3] %}
-    <br>
-    id:{{game_blog[0]}}
-    name:{{game_blog[1]}}
-    post time:{{game_blog[3]}}
-    <input type="checkbox" name="id" value="{{game_blog[0]}}">
-    <a href="/Blog2?community={{commu4}}&blog_name={{game_blog[1] }}&blog_id={{game_blog[0]}}">Go to blog</a>
-    <br>
-{% endfor %}
-<hr>
-you can choice the blog you want to delete by make the tick above beside the blog's name
-<input type="submit" value="DELETE the blogs you choiced">
-<br>   
-<a href="/">Back</a>
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<body>
+    <div class="header">
+        All My Blogs
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Back</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <form action="/all_my_blogs" method="POST">
+            <p>Hello</p>
+            <h2>community:{{commu1}}</h2>
+            <hr>
+            {% if list[0] %}
+                {% for school_blog in list[0] %}
+                    <div>
+                        <p>ID: {{ school_blog[0] }}</p>
+                        <p>Name: {{ school_blog[1] }}</p>
+                        <p>Post Time: {{ school_blog[3] }}</p>
+                        <input type="checkbox" name="id" value="{{ school_blog[0] }}">
+                        <a href="/Blog2?community={{ commu1 }}&blog_name={{ school_blog[1] }}&blog_id={{ school_blog[0] }}">Go to blog</a>
+                    </div>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                <p>You have no blogs in this community yet.</p>
+            {% endif %}
+            <h2>community:{{commu2}}</h2>
+            {% if list[1] %}
+                {% for life_blog in list[1] %}
+                    <div>
+                        <p>ID: {{ life_blog[0] }}</p>
+                        <p>Name: {{ life_blog[1] }}</p>
+                        <p>Post Time: {{ life_blog[3] }}</p>
+                        <input type="checkbox" name="id" value="{{ life_blog[0] }}">
+                        <a href="/Blog2?community={{ commu2 }}&blog_name={{ life_blog[1] }}&blog_id={{ life_blog[0] }}">Go to blog</a>
+                    </div>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                <p>You have no blogs in this community yet.</p>
+            {% endif %}
+
+            <h2>community:{{commu3}}</h2>
+            {% if list[2] %}
+                {% for sport_blog in list[2] %}
+                    <div>
+                        <p>ID: {{ sport_blog[0] }}</p>
+                        <p>Name: {{ sport_blog[1] }}</p>
+                        <p>Post Time: {{ sport_blog[3] }}</p>
+                        <input type="checkbox" name="id" value="{{ sport_blog[0] }}">
+                        <a href="/Blog2?community={{ commu3 }}&blog_name={{ sport_blog[1] }}&blog_id={{ sport_blog[0] }}">Go to blog</a>
+                    </div>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                <p>You have no blogs in this community yet.</p>
+            {% endif %}
+            
+            <h2>community:{{commu4}}</h2>
+            {% if list[3] %}
+                {% for game_blog in list[3] %}
+                    <div>
+                        <p>ID: {{ game_blog[0] }}</p>
+                        <p>Name: {{ game_blog[1] }}</p>
+                        <p>Post Time: {{ game_blog[3] }}</p>
+                        <input type="checkbox" name="id" value="{{ game_blog[0] }}">
+                        <a href="/Blog2?community={{ commu4 }}&blog_name={{ game_blog[1] }}&blog_id={{ game_blog[0] }}">Go to blog</a>
+                    </div>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                <p>You have no blogs in this community yet.</p>
+            {% endif %}
+            <input type="submit" value="Delete the selected blogs">
+        </form>
+    <p>You can delete the blog by select it in the box and press the "Delete the selected blogs" button.</p>
+    </div>
+</body>

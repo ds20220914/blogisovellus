@@ -70,8 +70,9 @@ def Blog2():
         blog_password=blogs.check_if_blog_password(blog_id)
         writer_name=blogs.find_writer_name(blog_id)
         
-        if blog_password!=None and session["username"]!="admin1" and writer_name[0]!=session["username"]:
-            return render_template("private.html",passw=blog_password[0],blog_id=blog_id,community=community,blog_name=blog_name,message=message[0])
+        if blog_password!=None:
+            if writer_name[0]!=session["username"] and session["username"]!="admin1":
+                return render_template("private.html",passw=blog_password[0],blog_id=blog_id,community=community,blog_name=blog_name,message=message[0],writer_name=writer_name)
 
         return render_template("Blog2.html",blog_id=blog_id,community=community,blog_name=blog_name,message=message[0],comments=comments)
 

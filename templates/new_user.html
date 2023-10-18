@@ -1,23 +1,23 @@
+
 <link rel="stylesheet" href="/static/main.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</head>
+
 <body>
     <div class="header">
         <h1>Welcome to the Blog</h1>
         <i>New User</i>
     </div>
 
-    <form action="/new_user" method="POST" class="user-form">
+    <form action="/new_user" method="POST">
         <p>Write the username:</p>
-        <input type="text" name="new_username" placeholder="Username" required>
+        <input type="text" name="new username" placeholder="Username" required>
         <p>Write the password:</p>
-        <input type="password" name="new_password" placeholder="Password" required>
+        <input type="password" name="new password" placeholder="Password" required>
         <p>Password should be at least 5 characters long, and the username should be unique.</p>
-        <button type="submit">Create</button>
+        <input type="submit" value="create">
+        <p>
+        <a href="/">Back</a>
+        <p>{% block content %}{% endblock %}</p>
     </form>
-   <form>
-    <a href="/">Back</a>
-   </form>
-    {% block content %}{% endblock %}
 </body>

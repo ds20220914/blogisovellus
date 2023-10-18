@@ -123,8 +123,8 @@ def check_if_blog_password(blog_id):
     return password 
 
 def find_writer_name(id):
-    query1 = text("SELECT U.username FROM Users U, Blogs B WHERE B.user_id=U.id ")
-    right_name = db.session.execute(query1)
+    query1 = text("SELECT U.username FROM Blogs B LEFT JOIN Users U ON B.user_id=U.id WHERE B.id=:id")
+    right_name = db.session.execute(query1,{"id":id})
     name=right_name.fetchone()
     return name 
 

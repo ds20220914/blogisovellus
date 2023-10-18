@@ -1,20 +1,34 @@
-<form action="/create" method="POST">
-<p>Topic:<br>
-<input type="text" name="topic"></p>
-<input type="radio" name="community" value="school"> School
-<input type="radio" name="community" value="life"> Life
-<input type="radio" name="community" value="sport"> Sport
-<input type="radio" name="community" value="game"> Game
-<p>Write your blog:<br>
-<input type="text" name="content"></p>
-<br>
-password:<br>
-<input type="password" name="password"></p>
-<br>
-you can set a password for your blog or you can leave it blank so there wont be any password
-<br>
 
-<input type="submit" value="write new blog">
-<br>
-<a href="/">Back</a>
-</form>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+<body>
+    <div class="header">
+        Create New Blog
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Back</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <form action="/create" method="POST">
+            <p>Topic:</p>
+            <input type="text" name="topic">
+            <p>Community:</p>
+            <input type="radio" name="community" value="school"> School
+            <input type="radio" name="community" value="life"> Life
+            <input type="radio" name="community" value="sport"> Sport
+            <input type="radio" name="community" value="game"> Game
+            <p>Write your blog(atmost 500 characters):</p>
+            <textarea name="content" rows="4"></textarea>
+            <p>Password:</p>
+            <input type="password" name="password">
+            <p>You can set a password for your blog, or you can leave it blank for no password.</p>
+            <input type="submit" value="Write New Blog">
+        </form>
+    </div>
+</body>

@@ -1,16 +1,31 @@
-<form action="/check_password" method="POST">
-<h1>Private blog</h1>
-<b>Welcome</b> <i>to the blog</i>!
-<i>give the blog password</i>!
-<p>
-Password:<br>
-<input type="password" name="password"></p>
-<a href="/Blog">back</a>
-<input type="submit" value="check">
-<input type="hidden" name="password1" value="{{ passw }}">
-<input type="hidden" name="blog_id" value="{{ blog_id }}">
-<input type="hidden" name="community" value="{{ community }}">
-<input type="hidden" name="blog_name" value="{{ blog_name }}">
-<input type="hidden" name="message" value="{{ message }}">
-</form>
 
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+<body>
+    <div class="header">
+        Private Blog 
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/Blog">Back</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <form action="/check_password" method="POST">
+            <h1>Private Blog</h1>
+            <p><b>Welcome</b> <i>to the blog</i>! <i>Give the blog password</i>!</p>
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Check">
+            <a href="/Blog">Back</a>
+            <input type="hidden" name="password1" value="{{ passw }}">
+            <input type="hidden" name="blog_id" value="{{ blog_id }}">
+            <input type="hidden" name="community" value="{{ community }}">
+            <input type="hidden" name="blog_name" value="{{ blog_name }}">
+            <input type="hidden" name="message" value="{{ message }}">
+        </form>
+    </div>
+</body>
