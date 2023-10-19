@@ -8,9 +8,6 @@
     <div class="header">
         Blog Comment
     </div>
-    <div class="subheader">
-        <h2>Community: {{ community }}</h2>
-    </div>
     <nav>
         <ul>
             <li><a href="/">Back</a></li>
@@ -25,7 +22,8 @@
             <p>Blog's ID: {{ blog_id }}</p>
             <p>Name: {{ blog_name }}</p>
             <label for="query">Write your comment here:</label>
-            <input type="text" name="query" id="query">
+            <br>
+            <textarea type="text" name="query" id="query"></textarea>
             <br>
             <input type="submit" name="find" value="Send the comment">
         </form>

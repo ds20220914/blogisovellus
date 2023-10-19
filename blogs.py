@@ -88,7 +88,7 @@ def all_my_blogs(username):
         list1.append([])
     if len(blogs4)!=0:
         list1.append(blogs4)
-    return list
+    return list1
 def delete_blog(id1):
     """ delete one single blog using given blog's id"""
     for i in id1:
@@ -116,7 +116,7 @@ def find_all_all_blogs():
     list1.append(blogs2)
     list1.append(blogs3)
     list1.append(blogs4)
-    return list
+    return list1
 def check_if_admin(user_id):
     """check if this user is admin"""
     query=text("SELECT id FROM Admin WHERE admin_id=:id ")

@@ -43,8 +43,6 @@ def new_user():
 @app.route("/Blog",methods=["POST","GET"])
 def Blog():
      if request.method=="POST":
-         if request.form["community"]=="":
-             return render_template("error3.html",message="please choose one community")
          community = request.form["community"]
          session["community"]=community
      community=session["community"]
@@ -102,6 +100,8 @@ def create():
     topic = request.form["topic"]
     community=request.form["community"]
     content=request.form["content"]
+    if topic=="" or content=="" or community=="":
+        return render_template("error3.html",message="topic,community and blog content cannot be blank, write something into the textbox.")
     user=session["username"]
     userid=blogs.find_userid_by_name(user)
     blog_password=request.form["password"]
@@ -109,7 +109,7 @@ def create():
     blog_id=blogs.recently_added_blog(userid[0])
     if len(blog_password)!=0:
         blogs.add_blog_password(int(blog_id[0]),blog_password)
-        
+
     return   render_template("start.html")
 
 @app.route("/add_comment", methods=["POST","GET"])

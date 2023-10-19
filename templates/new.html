@@ -23,6 +23,7 @@
             <input type="radio" name="community" value="life"> Life
             <input type="radio" name="community" value="sport"> Sport
             <input type="radio" name="community" value="game"> Game
+            <input type="hidden" name="community" value=""> 
             <p>Write your blog(atmost 500 characters):</p>
             <textarea name="content" rows="4"></textarea>
             <p>Password:</p>
@@ -30,5 +31,6 @@
             <p>You can set a password for your blog, or you can leave it blank for no password.</p>
             <input type="submit" value="Write New Blog">
         </form>
+        {% block content %}{% endblock %}
     </div>
 </body>
