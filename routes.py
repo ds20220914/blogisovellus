@@ -43,6 +43,8 @@ def new_user():
 @app.route("/Blog",methods=["POST","GET"])
 def Blog():
      if request.method=="POST":
+         if request.form["community"]=="":
+             return render_template("error3.html",message="please choose one community")
          community = request.form["community"]
          session["community"]=community
      community=session["community"]
@@ -55,6 +57,9 @@ def Blog2():
     community = session["community"]
     if button=="search":
         blog_name = request.args.get('query')
+        if blog_name==None or len(blog_name)==0:
+            list=blogs.find_all_blogs(community)
+            return render_template("Blog.html",community=community,list=list)
         list=blogs.find_all_blogs_byname(blog_name,community)
         return render_template("Blog.html",community=community,list=list)
 
@@ -69,10 +74,9 @@ def Blog2():
         comments=blogs.find_comments(blog_id)
         blog_password=blogs.check_if_blog_password(blog_id)
         writer_name=blogs.find_writer_name(blog_id)
-        
         if blog_password!=None:
             if writer_name[0]!=session["username"] and session["username"]!="admin1":
-                return render_template("private.html",passw=blog_password[0],blog_id=blog_id,community=community,blog_name=blog_name,message=message[0],writer_name=writer_name)
+                return render_template("private.html",passw=blog_password[0],blog_id=blog_id,community=community,blog_name=blog_name,message=message[0])
 
         return render_template("Blog2.html",blog_id=blog_id,community=community,blog_name=blog_name,message=message[0],comments=comments)
 
@@ -133,8 +137,8 @@ def all_my_blogs():
         blogs.delete_blog(delete)
     commu1="school"
     commu2="life"
-    commu3="game"
-    commu4="sport"
+    commu3="sport"
+    commu4="game"
     username=session["username"]
     id=blogs.find_userid_by_name(username)
     admin=blogs.check_if_admin(id)
