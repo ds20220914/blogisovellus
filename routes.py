@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from app import app
 import user
 import blogs
-
+import secrets
 
 @app.route("/")
 def index():
@@ -35,6 +35,7 @@ def result():
         if result1 is False:
             return render_template("error.html",message="username or password wrong, try again")
         session["username"]=username1
+        session["csrf_token"] = secrets.token_hex(16)
         session["community"]=""
         return redirect("/")
 
@@ -82,6 +83,7 @@ def Blog2():
 
     blog_id = request.args.get('blog_id')
     message=blogs.find_text(community,blog_id)
+    new_message=message[0].replace('\n', '<br>')
     blog_name=request.args.get('blog_name')
     comments=blogs.find_comments(blog_id)
     blog_password=blogs.check_if_blog_password(blog_id)
@@ -91,11 +93,11 @@ def Blog2():
             return render_template("private.html",
                                     passw=blog_password[0],blog_id=blog_id,
                                     community=community,blog_name=blog_name,
-                                    message=message[0])
+                                    message=new_message)
 
     return render_template("Blog2.html",
                             blog_id=blog_id,community=community,
-                            blog_name=blog_name,message=message[0],
+                            blog_name=blog_name,message=new_message,
                             comments=comments)
 
 
@@ -118,12 +120,15 @@ def check_password():
 def new_blog():
     """show the page where user can write new blog
        returns: Rendered template"""
-    return render_template("new.html")
+    session.csrf_token=session["csrf_token"]
+    return render_template("new.html" )
 
 @app.route("/create", methods=["POST"])
 def create():
     """create a new blog and go back to start page
        returns: rendered templates"""
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     topic = request.form["topic"]
     community=request.form["community"]
     content=request.form["content"]
@@ -155,6 +160,8 @@ def add_comment():
 def add_comment2():
     """add a comment can go back to list page
        returns:rendered template"""
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     community=session["community"]
     blog_id=request.form["blog_id"]
     content=request.form["query"]
@@ -171,6 +178,8 @@ def all_my_blogs():
     """find all the blogs user has posted
        returns:rendered templates"""
     if request.method=="POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         delete=request.form.getlist("id")
         blogs.delete_blog(delete)
     commu1="school"
