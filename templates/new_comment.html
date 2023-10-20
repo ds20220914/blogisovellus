@@ -18,6 +18,7 @@
             <input type="hidden" name="blog_id" value="{{ blog_id }}">
             <input type="hidden" name="blog_name" value="{{ blog_name }}">
             <input type="hidden" name="community" value="{{ community }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <h2>Community: {{ community }}</h2>
             <p>Blog's ID: {{ blog_id }}</p>
             <p>Name: {{ blog_name }}</p>

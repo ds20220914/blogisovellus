@@ -80,6 +80,7 @@
                 <p>You have no blogs in this community yet.</p>
             {% endif %}
             <input type="submit" value="Delete the selected blogs">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     <p>You can delete the blog by select it in the box and press the "Delete the selected blogs" button.</p>
     </div>
