@@ -22,23 +22,25 @@
         <p>Blog name: {{ blog_name }}</p>
         <p>Blog's ID: {{ blog_id }}</p>
         
-        <div class="comments-box">
+        <div class="article-content">
             <p>Message:</p>
             <p>{{ message | safe  }}</p>
         </div>
         
-        <div class="comments-box">
-            <p>Comments:</p>
-            <ul>
-                {% if comments %}
-                    {% for comment in comments %}
-                        <li>{{ comment[0] }}</li>
-                    {% endfor %}
-                {% else %}
-                    <li>No comments yet.</li>
-                {% endif %}
-            </ul>
-        </div>
+        <p>Comments:</p>
+        <ul>
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="article-content">
+                        <p>Message:</p>
+                        <p>{{ comment[0] | safe }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <li>No comments yet.</li>
+            {% endif %}
+        </ul>
+  
         <a href="/add_comment?community={{ community }}&blog_name={{ blog_name}}&blog_id={{blog_id}}">add comment</a>
         <input type="hidden" name="community" value="{{ community }}">
         <input type="hidden" name="blog_id" value="{{ blog_id }}">

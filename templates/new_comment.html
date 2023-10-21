@@ -21,12 +21,13 @@
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <h2>Community: {{ community }}</h2>
             <p>Blog's ID: {{ blog_id }}</p>
-            <p>Name: {{ blog_name }}</p>
+            <p>Blog name: {{ blog_name }}</p>
             <label for="query">Write your comment here:</label>
             <br>
-            <textarea type="text" name="query" id="query"></textarea>
+            <textarea type="text" name="query" id="query" rows="4" cols="70" maxlength="500"></textarea>
             <br>
             <input type="submit" name="find" value="Send the comment">
         </form>
+        {% block content %}{% endblock %}
     </div>
 </body>

@@ -28,16 +28,50 @@ form {
     background: blanchedalmond;
 }
 
+label {
+  margin-right: 5px;
+}
+
+label2 {
+  margin-right: 10px;
+}
+
+
 nav ul {
     padding: 0;
     margin: .5em;
     text-align: center;
 }
 
-.comments-box {
+
+textarea {
+    word-break: break-all;
+}
+
+
+.message-box {
+            display: inline-block;
             background: blanchedalmond;
-            padding: 1em;
             border: 1px solid #ddd;
             border-radius: 5px;
             margin-top: 1em;
+            padding: 1em ;
+            word-wrap: break-word;
+            text-overflow: ellipsis;
+}
+
+.article-content {
+    display: inline-block;
+    vertical-align: top;
+    background: blanchedalmond;
+    border: 1px solid  #ddd;
+    border-radius: 5px;
+    padding: 1em;
+    line-height: 1.4;
+    width: 40em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow-y: auto;
 }

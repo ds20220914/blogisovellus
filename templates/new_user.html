@@ -11,10 +11,11 @@
 
     <form action="/new_user" method="POST">
         <p>Write the username:</p>
-        <input type="text" name="new username" placeholder="Username" required>
+        <input type="text" name="new username" placeholder="Username" required maxlength="10">
         <p>Write the password:</p>
-        <input type="password" name="new password" placeholder="Password" required>
+        <input type="password" name="new password" placeholder="Password" required maxlength="15">
         <p>Password should be at least 5 characters long, and the username should be unique.</p>
+        <p>The max length for username is 10 characters and for password is 15 characters.</p>
         <input type="submit" value="create">
         <p>
         <a href="/">Back</a>

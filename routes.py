@@ -132,7 +132,9 @@ def create():
     topic = request.form["topic"]
     community=request.form["community"]
     content=request.form["content"]
-    if topic=="" or content=="" or community=="":
+    check_content_blank=content.strip()
+    check_topic_blank=topic.strip()
+    if len(check_topic_blank)==0 or len(check_content_blank)==0 or community=="":
         return render_template("error3.html",
            message="topic,community and blog content cannot be blank,"
                     "write something into the box.")
@@ -166,7 +168,13 @@ def add_comment2():
     blog_id=request.form["blog_id"]
     content=request.form["query"]
     blog_name=request.form["blog_name"]
-    blogs.add_comment(blog_id,content)
+    check_blank=content.strip()
+    if len(check_blank)==0:
+        return render_template("error4.html",community=community,blog_id=blog_id,
+                                blog_name=blog_name,
+                                message="comment cannot be blank, write something")
+    new_content=content.replace('\n', '<br>')
+    blogs.add_comment(blog_id,new_content)
     message=blogs.find_text(community,blog_id)
     comments=blogs.find_comments(blog_id)
     return render_template("Blog2.html",
@@ -188,12 +196,16 @@ def all_my_blogs():
     commu4="game"
     username=session["username"]
     id1=blogs.find_userid_by_name(username)
+    number=blogs.count_user_blog(id1[0])
+    time=blogs.user_first_blog(id1[0])
     admin=blogs.check_if_admin(id1)
     if len(admin)!=0:
         list=blogs.find_all_all_blogs()
         return render_template("all_my_blogs.html",list=list,commu1=commu1,
-                                commu2=commu2,commu3=commu3,commu4=commu4)
+                                commu2=commu2,commu3=commu3,commu4=commu4,
+                                time=time,number=number[0])
     userid=blogs.find_userid_by_name(username)
     list=blogs.all_my_blogs(userid[0])
     return render_template("all_my_blogs.html",list=list,commu1=commu1,
-                            commu2=commu2,commu3=commu3,commu4=commu4)
+                            commu2=commu2,commu3=commu3,commu4=commu4,
+                            time=time,number=number[0])

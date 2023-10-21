@@ -15,7 +15,8 @@
     </nav>
     <div class="content">
         <form action="/all_my_blogs" method="POST">
-            <p>Hello</p>
+            <p>Hello user, you have a total of {{number}} blogs.</p>
+            <p>first blog is writed at {{time[0]}}.</p>
             <h2>community:{{commu1}}</h2>
             <hr>
             {% if list[0] %}

@@ -179,3 +179,19 @@ def find_writer_name(blogid):
     right_name = db.session.execute(query1,{"id":blogid})
     name=right_name.fetchone()
     return name
+
+def count_user_blog(userid):
+    query1=text("SELECT COUNT(B.id) FROM Users U LEFT JOIN Blogs B"
+                 " ON U.id=B.user_id WHERE U.id=:id ")
+    count = db.session.execute(query1,{"id":userid})
+    number=count.fetchone()
+    return number
+
+def user_first_blog(userid):
+    query1=text("SELECT B.time FROM Users U LEFT JOIN Blogs B"
+                 " ON U.id=B.user_id WHERE U.id=:id AND B.id = "
+                 "(SELECT MIN(id) FROM Blogs WHERE user_id = U.id) ")
+    time = db.session.execute(query1,{"id":userid})
+    number=time.fetchone()
+    return number
+
