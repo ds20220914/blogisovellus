@@ -11,7 +11,6 @@ def index():
     """
        This route renders and displays the start page to the user.
        returns:Rendered templates"""
-    session["community"]=''
     return render_template("start.html")
 
 @app.route("/logout")
@@ -62,6 +61,7 @@ def Blog():
         session["community"]=community
     community=session["community"]
     list1=blogs.find_all_blogs(session["community"])
+    session["blog"]=""
     return render_template("Blog.html",community=community,list1=list1)
 
 @app.route("/Blog2",methods=["POST","GET"])
@@ -86,20 +86,24 @@ def Blog2():
     message=blogs.find_text(community,blog_id)
     new_message=message[0].replace('\n', '<br>')
     blog_name=request.args.get('blog_name')
-    comments=blogs.find_comments(blog_id)
     blog_password=blogs.check_if_blog_password(blog_id)
-    writer_name=blogs.find_writer_name(blog_id)
+    comments=blogs.find_comments(blog_id)
+    comments2=[]
+    writer_name1=blogs.find_writer_name(blog_id)
+    for i in comments:
+        writer_name=blogs.find_comment_writer_name(i[0])
+        comments2.append((i[1],writer_name[0],i[3]))
     if blog_password is not None:
-        if writer_name[0]!=session["username"] and session["username"]!="admin1":
+        if writer_name1[0]!=session["username"] and session["username"]!="admin1" and session["blog"]!=blog_id:
             return render_template("private.html",
                                     passw=blog_password[0],blog_id=blog_id,
                                     community=community,blog_name=blog_name,
-                                    message=new_message)
+                                    message=new_message,blog_time=message[2],blog_writer=message[1])
 
     return render_template("Blog2.html",
                             blog_id=blog_id,community=community,
                             blog_name=blog_name,message=new_message,
-                            comments=comments)
+                            comments=comments2,blog_time=message[2],blog_writer=message[1])
 
 
 @app.route("/check_password",methods=["POST"])
@@ -112,10 +116,18 @@ def check_password():
     community=request.form["community"]
     blog_name=request.form["blog_name"]
     message=request.form["message"]
+    writer=request.form["blog_writer"]
+    time=request.form["blog_time"]
     if password==password1:
+        session["blog"]=blog_id
         comments=blogs.find_comments(blog_id)
+        comments2=[]
+        for i in comments:
+            writer_name=blogs.find_comment_writer_name(i[0])
+            comments2.append((i[1],writer_name[0],i[3]))
         return render_template("Blog2.html",blog_id=blog_id,community=community,
-                                blog_name=blog_name,message=message,comments=comments)
+                                blog_name=blog_name,message=message,comments=comments2,
+                                blog_time=time,blog_writer=writer)
 
 @app.route("/new_blog")
 def new_blog():
@@ -175,14 +187,10 @@ def add_comment2():
                                 blog_name=blog_name,
                                 message="comment cannot be blank, write something")
     new_content=content.replace('\n', '<br>')
-    blogs.add_comment(blog_id,new_content)
-    message=blogs.find_text(community,blog_id)
-    if message==None:
-        message="None"
-    comments=blogs.find_comments(blog_id)
-    return render_template("Blog2.html",community=community,blog_id=blog_id,
-                            blog_name=blog_name,message=message[0],comments=comments)
-
+    user1=session["username"]
+    userid=blogs.find_userid_by_name(user1)
+    blogs.add_comment(blog_id,new_content,userid[0])
+    return redirect(f"/Blog2?community={community}&blog_name={blog_name}&blog_id={blog_id}")
 @app.route("/all_my_blogs",methods=["POST","GET"])
 def all_my_blogs():
     """find all the blogs user has posted

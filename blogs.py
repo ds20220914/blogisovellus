@@ -38,7 +38,7 @@ def find_text(community,blog_id ):
        id
        Args: community name, blog's id
        returns: the blog's text"""
-    query = text("SELECT content FROM Blogs WHERE id=:id AND community=:community")
+    query = text("SELECT content,user_id,time FROM Blogs WHERE id=:id AND community=:community")
     right_blogs = db.session.execute(query,{"id":blog_id,"community":community})
     blog=right_blogs.fetchone()
     return blog
@@ -53,19 +53,19 @@ def find_all_blogs_byname(name,community):
     blogs=right_blogs.fetchall()
     return blogs
 
-def add_comment(id1,content):
+def add_comment(id1,content,userid):
     """add a comment to the blog
        Args: blog's id and comment text
        """
-    query = text(" INSERT INTO Comments (Blog_id,content) VALUES (:id , :content)")
-    db.session.execute(query,{"id":id1, "content":content})
+    query = text(" INSERT INTO Comments (Blog_id,content,writer,time) VALUES (:id , :content,:writer,NOW())")
+    db.session.execute(query,{"id":id1, "content":content,"writer":userid})
     db.session.commit()
 
 def find_comments(blog_id):
     """ find all the comments of a blog
         Args: blog's id
         returns: all the comments that found"""
-    query = text(" SELECT content FROM Comments WHERE Blog_id=:id ")
+    query = text(" SELECT id,content,writer,time FROM Comments WHERE Blog_id=:id ")
     right_comments = db.session.execute(query,{"id":blog_id})
     comments=right_comments.fetchall()
     return comments
@@ -195,3 +195,12 @@ def user_first_blog(userid):
     number=time.fetchone()
     return number
 
+def find_comment_writer_name(commid):
+    """ find the name of blog writer
+        Args: blog's id
+        returns: writer name"""
+    query1 = text("SELECT U.username FROM Comments C  LEFT JOIN Users U"
+                   " ON C.writer=U.id WHERE C.id=:id")
+    right_name = db.session.execute(query1,{"id":commid})
+    name=right_name.fetchone()
+    return name

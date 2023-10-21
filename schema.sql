@@ -16,7 +16,9 @@ CREATE TABLE Blogs (
 CREATE TABLE Comments (
     id SERIAL PRIMARY KEY,
     Blog_id INTEGER REFERENCES Blogs ON DELETE CASCADE,
-    content TEXT
+    content TEXT,
+    writer  INTEGER REFERENCES users ON DELETE CASCADE,
+    time    TIMESTAMP
 );
 
 
