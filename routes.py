@@ -11,6 +11,7 @@ def index():
     """
        This route renders and displays the start page to the user.
        returns:Rendered templates"""
+    session["community"]=''
     return render_template("start.html")
 
 @app.route("/logout")
@@ -36,7 +37,7 @@ def result():
             return render_template("error.html",message="username or password wrong, try again")
         session["username"]=username1
         session["csrf_token"] = secrets.token_hex(16)
-        session["community"]=""
+        session["community"]=''
         return redirect("/")
 
 @app.route("/new_user", methods=["POST"])
@@ -152,7 +153,7 @@ def create():
 def add_comment():
     """show add a comment page
        returns:rendered template"""
-    community=session["community"]
+    community=request.args.get("community")
     blog_id=request.args.get("blog_id")
     blog_name=request.args.get("blog_name")
     return render_template("new_comment.html",
@@ -164,7 +165,7 @@ def add_comment2():
        returns:rendered template"""
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
-    community=session["community"]
+    community=request.form["community"]
     blog_id=request.form["blog_id"]
     content=request.form["query"]
     blog_name=request.form["blog_name"]
@@ -176,9 +177,10 @@ def add_comment2():
     new_content=content.replace('\n', '<br>')
     blogs.add_comment(blog_id,new_content)
     message=blogs.find_text(community,blog_id)
+    if message==None:
+        message="None"
     comments=blogs.find_comments(blog_id)
-    return render_template("Blog2.html",
-                            community=community,blog_id=blog_id,
+    return render_template("Blog2.html",community=community,blog_id=blog_id,
                             blog_name=blog_name,message=message[0],comments=comments)
 
 @app.route("/all_my_blogs",methods=["POST","GET"])
