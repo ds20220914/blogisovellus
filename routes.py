@@ -60,7 +60,7 @@ def Blog():
         community = request.form["community"]
         session["community"]=community
     community=session["community"]
-    list1=blogs.find_all_blogs(session["community"])
+    list1=blogs.find_all_blogs(community)
     session["blog"]=""
     return render_template("Blog.html",community=community,list1=list1)
 
@@ -69,16 +69,16 @@ def Blog2():
     """show single blog
        returns: Rendered templates"""
     button= request.args.get("find")
-    community = session["community"]
     if button=="search":
         blog_name = request.args.get('query')
         if blog_name is None or len(blog_name)==0:
-            list1=blogs.find_all_blogs(community)
-            return render_template("Blog.html",community=community,list1=list1)
-        list1=blogs.find_all_blogs_byname(blog_name,community)
-        return render_template("Blog.html",community=community,list1=list1)
+            list1=blogs.find_all_blogs(session["community"])
+            return render_template("Blog.html",community=session["community"],list1=list1)
+        list1=blogs.find_all_blogs_byname(blog_name,session["community"])
+        return render_template("Blog.html",community=session["community"],list1=list1)
 
     community=request.args.get('community')
+    session["community"]=community
     if session["community"]=="":
         session["community"]=community
 
@@ -98,12 +98,12 @@ def Blog2():
             return render_template("private.html",
                                     passw=blog_password[0],blog_id=blog_id,
                                     community=community,blog_name=blog_name,
-                                    message=new_message,blog_time=message[2],blog_writer=message[1])
+                                    message=new_message,blog_time=message[2],blog_writer=writer_name1[0])
 
     return render_template("Blog2.html",
-                            blog_id=blog_id,community=community,
+                            blog_id=blog_id,community=community,message2=message,
                             blog_name=blog_name,message=new_message,
-                            comments=comments2,blog_time=message[2],blog_writer=message[1])
+                            comments=comments2,blog_time=message[2],blog_writer=writer_name1[0])
 
 
 @app.route("/check_password",methods=["POST"])
@@ -116,6 +116,7 @@ def check_password():
     community=request.form["community"]
     blog_name=request.form["blog_name"]
     message=request.form["message"]
+    message2=blogs.find_text(community,blog_id)
     writer=request.form["blog_writer"]
     time=request.form["blog_time"]
     if password==password1:
@@ -127,7 +128,7 @@ def check_password():
             comments2.append((i[1],writer_name[0],i[3]))
         return render_template("Blog2.html",blog_id=blog_id,community=community,
                                 blog_name=blog_name,message=message,comments=comments2,
-                                blog_time=time,blog_writer=writer)
+                                blog_time=time,blog_writer=writer,message2=message2)
 
 @app.route("/new_blog")
 def new_blog():

@@ -17,13 +17,12 @@
     </nav>
     <div class="content">
 
-        <p>Hello!</p>
         <p>Community: {{ community }}</p>
         <p>Blog name: {{ blog_name }}</p>
-        <p>Blog's ID: {{ blog_id }}</p>
-        
+        <p>Writer:{{blog_writer}}</p>   
+        <p>Post time:{{message2.time.strftime("%Y-%m-%d %H:%M:%S")}}</p>
+        <p>Content:</p>
         <div class="article-content">
-            <p>{{blog_writer}}{{blog_time}}</p>
             <p>{{ message | safe  }}</p>
         </div>
         
@@ -32,7 +31,7 @@
         {% if comments %}
             {% for comment in comments %}
                 <div class="article-content">
-                    {{comment[1]}}{{comment[2]}}
+                    Writer:{{comment[1]}}&nbsp;&nbsp;{{comment[2].strftime("%Y-%m-%d %H:%M:%S")}}
                     <p>{{ comment[0] | safe }}</p>
                 </div>
             {% endfor %}

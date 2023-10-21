@@ -1,7 +1,7 @@
 "Here are all the functions that handle the tables in database "
 from sqlalchemy import text
 from db import db
-
+from datetime import datetime
 
 
 def find_all_blogs(community):
