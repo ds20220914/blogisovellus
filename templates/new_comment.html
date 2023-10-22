@@ -6,7 +6,7 @@
 
 <body>
     <div class="header">
-        Blog Comment
+        Post Comment
     </div>
     <nav>
         <ul>
@@ -20,8 +20,8 @@
             <input type="hidden" name="community" value="{{ community }}">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <h2>Community: {{ community }}</h2>
-            <p>Blog's ID: {{ blog_id }}</p>
-            <p>Blog name: {{ blog_name }}</p>
+            <p>Post's ID: {{ blog_id }}</p>
+            <p>Post name: {{ blog_name }}</p>
             <label for="query">Write your comment here:</label>
             <br>
             <textarea type="text" name="query" id="query" rows="4" cols="70" maxlength="500"></textarea>

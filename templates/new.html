@@ -7,7 +7,7 @@
 
 <body>
     <div class="header">
-        Create New Blog
+        Create New Post
     </div>
     <nav>
         <ul>
@@ -25,11 +25,11 @@
             <input type="radio" name="community" value="game"> Game
             <input type="hidden" name="community" value=""> 
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-            <p>Write your blog(atmost 500 characters):</p>
+            <p>Write your post(atmost 500 characters):</p>
             <textarea name="content" rows="4" cols="50" maxlength="500"></textarea>
             <p>Password:</p>
             <input type="password" name="password" maxlength="20">
-            <p>You can set a password for your blog, or you can leave it blank for no password.</p>
+            <p>You can set a password for your post, or you can leave it blank for no password.</p>
             <input type="submit" value="Write New Blog">
         </form>
         {% block content %}{% endblock %}
