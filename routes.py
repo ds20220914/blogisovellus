@@ -215,6 +215,8 @@ def all_my_blogs():
     id1=blogs.find_userid_by_name(username)
     number=blogs.count_user_blog(id1[0])
     time=blogs.user_first_blog(id1[0])
+    if time!=None:
+        time=time[0]
     admin=blogs.check_if_admin(id1)
     if len(admin)!=0:
         list=blogs.find_all_all_blogs()

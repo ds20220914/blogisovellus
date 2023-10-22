@@ -16,7 +16,9 @@
     <div class="content">
         <form action="/all_my_blogs" method="POST">
             <p>Hello user, you have a total of {{number}} posts.</p>
-            <p>Your first post is writed at {{time[0].strftime("%Y-%m-%d %H:%M:%S")}}.</p>
+            {% if time %}
+            <p>Your first post is writed at {{time.strftime("%Y-%m-%d %H:%M:%S")}}.</p>
+            {% endif %}
             <h2>community:{{commu1}}</h2>
             {% if list[0] %}
                 {% for school_blog in list[0] %}
