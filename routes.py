@@ -1,10 +1,11 @@
 """here are all the passes between the pages"""
+import secrets
 from flask import redirect, render_template,request,session
 from flask_sqlalchemy import SQLAlchemy
 from app import app
 import user
 import blogs
-import secrets
+
 
 @app.route("/")
 def index():
@@ -98,7 +99,8 @@ def Blog2():
             return render_template("private.html",
                                     passw=blog_password[0],blog_id=blog_id,
                                     community=community,blog_name=blog_name,
-                                    message=new_message,blog_time=message[2],blog_writer=writer_name1[0])
+                                    message=new_message,blog_time=message[2],
+                                    blog_writer=writer_name1[0])
 
     return render_template("Blog2.html",
                             blog_id=blog_id,community=community,message2=message,
@@ -215,7 +217,7 @@ def all_my_blogs():
     id1=blogs.find_userid_by_name(username)
     number=blogs.count_user_blog(id1[0])
     time=blogs.user_first_blog(id1[0])
-    if time!=None:
+    if time is not None:
         time=time[0]
     admin=blogs.check_if_admin(id1)
     if len(admin)!=0:

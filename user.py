@@ -1,7 +1,7 @@
-from db import db
 from sqlalchemy import text
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import session
+from db import db
 
 def login(username1,password1):
     if len(username1)==0 or len(password1) ==0:
@@ -10,7 +10,7 @@ def login(username1,password1):
     right_user = db.session.execute(query, {"username1": username1})
     number=right_user.fetchone()
     sign_in=False
-    if number==None:
+    if number is None:
         return False
     if len(number)!=0:
         hash_value=number.password
