@@ -16,15 +16,14 @@
     <div class="content">
         <form action="/all_my_blogs" method="POST">
             <p>Hello user, you have a total of {{number}} posts.</p>
-            <p>first post is writed at {{time[0]}}.</p>
+            <p>Your first post is writed at {{time[0].strftime("%Y-%m-%d %H:%M:%S")}}.</p>
             <h2>community:{{commu1}}</h2>
-            <hr>
             {% if list[0] %}
                 {% for school_blog in list[0] %}
                     <div>
                         <p>ID: {{ school_blog[0] }}</p>
                         <p>Name: {{ school_blog[1] }}</p>
-                        <p>Post Time: {{ school_blog[3] }}</p>
+                        <p>Post Time: {{ school_blog[3].strftime("%Y-%m-%d %H:%M:%S") }}</p>
                         <input type="checkbox" name="id" value="{{ school_blog[0] }}">
                         <a href="/Blog2?community={{ commu1 }}&blog_name={{ school_blog[1] }}&blog_id={{ school_blog[0] }}">Go to post</a>
                     </div>
@@ -39,7 +38,7 @@
                     <div>
                         <p>ID: {{ life_blog[0] }}</p>
                         <p>Name: {{ life_blog[1] }}</p>
-                        <p>Post Time: {{ life_blog[3] }}</p>
+                        <p>Post Time: {{ life_blog[3].strftime("%Y-%m-%d %H:%M:%S") }}</p>
                         <input type="checkbox" name="id" value="{{ life_blog[0] }}">
                         <a href="/Blog2?community={{ commu2 }}&blog_name={{ life_blog[1] }}&blog_id={{ life_blog[0] }}">Go to post</a>
                     </div>
@@ -55,7 +54,7 @@
                     <div>
                         <p>ID: {{ sport_blog[0] }}</p>
                         <p>Name: {{ sport_blog[1] }}</p>
-                        <p>Post Time: {{ sport_blog[3] }}</p>
+                        <p>Post Time: {{ sport_blog[3].strftime("%Y-%m-%d %H:%M:%S") }}</p>
                         <input type="checkbox" name="id" value="{{ sport_blog[0] }}">
                         <a href="/Blog2?community={{ commu3 }}&blog_name={{ sport_blog[1] }}&blog_id={{ sport_blog[0] }}">Go to post</a>
                     </div>
@@ -71,7 +70,7 @@
                     <div>
                         <p>ID: {{ game_blog[0] }}</p>
                         <p>Name: {{ game_blog[1] }}</p>
-                        <p>Post Time: {{ game_blog[3] }}</p>
+                        <p>Post Time: {{ game_blog[3].strftime("%Y-%m-%d %H:%M:%S") }}</p>
                         <input type="checkbox" name="id" value="{{ game_blog[0] }}">
                         <a href="/Blog2?community={{ commu4 }}&blog_name={{ game_blog[1] }}&blog_id={{ game_blog[0] }}">Go to post</a>
                     </div>

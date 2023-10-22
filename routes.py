@@ -129,6 +129,12 @@ def check_password():
         return render_template("Blog2.html",blog_id=blog_id,community=community,
                                 blog_name=blog_name,message=message,comments=comments2,
                                 blog_time=time,blog_writer=writer,message2=message2)
+    else:
+        return render_template("error5.html",
+                                passw=password1,blog_id=blog_id,
+                                community=community,blog_name=blog_name,
+                                message=message,blog_time=time,blog_writer=writer,
+                                message3="password wrong, try again!")
 
 @app.route("/new_blog")
 def new_blog():
