@@ -36,7 +36,7 @@ Painamalla kotisivulla oleva "Logout" pääset kirjautumaan ulos.
 Huomio, älä käytä enteria sisällön lähettämisessä!!
 
 Huomaa, että koodissa on käytetty reittien ja funktion nimeksi ".....blog..." eikä "Post", se johtuu siitä, että alussa suunnittelin tekemään blogisovellus, 
-mutta lopussa siitä tuli enemmän foorumin tapainen sovellus.  EHKÄ tämä on sitten blogi ja foorumin yhdistelmä, ja tässä appissä blogs=posts, ovat sama juttu....
+mutta lopussa siitä tuli enemmän foorumin tapainen sovellus. Tämä on sitten blogi ja foorumin yhdistelmä, ja tässä appissä blogs=posts, ovat sama juttu....
 
 Ylläpitäjän käyttäjä on admin1 ja salasana 20020914
 ja se on ainoa ylläpitäjä, ylläpitäjän käyttäjä on vakiintuinen eikä tulee uusia.
