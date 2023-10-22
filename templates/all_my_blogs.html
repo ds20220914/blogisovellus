@@ -6,7 +6,7 @@
 
 <body>
     <div class="header">
-        All My Blogs
+        All My POSTS
     </div>
     <nav>
         <ul>
@@ -15,8 +15,8 @@
     </nav>
     <div class="content">
         <form action="/all_my_blogs" method="POST">
-            <p>Hello user, you have a total of {{number}} blogs.</p>
-            <p>first blog is writed at {{time[0]}}.</p>
+            <p>Hello user, you have a total of {{number}} posts.</p>
+            <p>first post is writed at {{time[0]}}.</p>
             <h2>community:{{commu1}}</h2>
             <hr>
             {% if list[0] %}
@@ -31,7 +31,7 @@
                     <hr>
                 {% endfor %}
             {% else %}
-                <p>You have no blogs in this community yet.</p>
+                <p>You have no posts in this community yet.</p>
             {% endif %}
             <h2>community:{{commu2}}</h2>
             {% if list[1] %}
@@ -46,7 +46,7 @@
                     <hr>
                 {% endfor %}
             {% else %}
-                <p>You have no blogs in this community yet.</p>
+                <p>You have no posts in this community yet.</p>
             {% endif %}
 
             <h2>community:{{commu3}}</h2>
@@ -62,7 +62,7 @@
                     <hr>
                 {% endfor %}
             {% else %}
-                <p>You have no blogs in this community yet.</p>
+                <p>You have no posts in this community yet.</p>
             {% endif %}
             
             <h2>community:{{commu4}}</h2>
@@ -78,11 +78,11 @@
                     <hr>
                 {% endfor %}
             {% else %}
-                <p>You have no blogs in this community yet.</p>
+                <p>You have no posts in this community yet.</p>
             {% endif %}
-            <input type="submit" value="Delete the selected blogs">
+            <input type="submit" value="Delete selected posts">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
-    <p>You can delete the blog by select it in the box and press the "Delete the selected blogs" button.</p>
+    <p>You can delete the post by select it in the box and press the "Delete selected posts" button.</p>
     </div>
 </body>
